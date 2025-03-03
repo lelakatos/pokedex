@@ -22,7 +22,7 @@ func startRepl() {
 
 		command, exists := getCommands()[commandName]
 		if exists {
-			err := command.callback()
+			err := command.callback(&c)
 			if err != nil {
 				fmt.Println(err)
 			}
@@ -43,7 +43,7 @@ func cleanInput(text string) []string {
 type cliCommand struct {
 	name        string
 	description string
-	callback    func() error
+	callback    func(*config) error
 }
 
 func getCommands() map[string]cliCommand {
@@ -58,5 +58,25 @@ func getCommands() map[string]cliCommand {
 			description: "Exit the Pokedex",
 			callback:    commandExit,
 		},
+		"map": {
+			name:        "map",
+			description: "List next page of location areas",
+			callback:    commandMap,
+		},
+		"mapb": {
+			name:        "mapb",
+			description: "List prev page of location areas",
+			callback:    commandMapb,
+		},
 	}
+}
+
+type config struct {
+	Previous string
+	Next     string
+}
+
+var c config = config{
+	Previous: "",
+	Next:     "https://pokeapi.co/api/v2/location-area/",
 }
