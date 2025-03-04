@@ -5,19 +5,7 @@ import (
 	"fmt"
 )
 
-type Result struct {
-	Name string `json:"name"`
-	Url  string `json:"url"`
-}
-
-type Locations struct {
-	Count    int      `json:"count"`
-	Next     string   `json:"next"`
-	Previous string   `json:"previous"`
-	Results  []Result `json:"results"`
-}
-
-func commandMap(cfg *config) error {
+func commandMap(cfg *config, p string) error {
 
 	locationResp, err := cfg.pokeapiClient.ListLocations(cfg.nextLocationsURL, cfg.cache)
 	if err != nil {
@@ -34,7 +22,7 @@ func commandMap(cfg *config) error {
 	return nil
 }
 
-func commandMapb(cfg *config) error {
+func commandMapb(cfg *config, p string) error {
 	if cfg.previousLocationsURL == nil {
 		return errors.New("you are on the first page")
 	}
