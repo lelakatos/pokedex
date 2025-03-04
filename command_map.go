@@ -18,7 +18,8 @@ type Locations struct {
 }
 
 func commandMap(cfg *config) error {
-	locationResp, err := cfg.pokeapiClient.ListLocations(cfg.nextLocationsURL)
+
+	locationResp, err := cfg.pokeapiClient.ListLocations(cfg.nextLocationsURL, cfg.cache)
 	if err != nil {
 		return fmt.Errorf("error with the API call: %w", err)
 	}
@@ -35,9 +36,9 @@ func commandMap(cfg *config) error {
 
 func commandMapb(cfg *config) error {
 	if cfg.previousLocationsURL == nil {
-		return errors.New("You are on the first page")
+		return errors.New("you are on the first page")
 	}
-	locationResp, err := cfg.pokeapiClient.ListLocations(cfg.previousLocationsURL)
+	locationResp, err := cfg.pokeapiClient.ListLocations(cfg.previousLocationsURL, cfg.cache)
 	if err != nil {
 		return fmt.Errorf("error with the API call: %w", err)
 	}

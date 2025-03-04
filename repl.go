@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/lelakatos/pokedex/internal/pokeapi"
+	"github.com/lelakatos/pokedex/internal/pokecache"
 )
 
 func startRepl(cfg *config) {
@@ -75,6 +76,7 @@ func getCommands() map[string]cliCommand {
 
 type config struct {
 	pokeapiClient        pokeapi.Client
+	cache                *pokecache.Cache
 	nextLocationsURL     *string
 	previousLocationsURL *string
 }
