@@ -82,12 +82,23 @@ func getCommands() map[string]cliCommand {
 			description: "Returns all the pokemon located in the area",
 			callback:    commandExplore,
 		},
+		"catch": {
+			name:        "catch",
+			description: "Try to catch the named pokemon",
+			callback:    commandCatch,
+		},
+		"inspect": {
+			name:        "inspect",
+			description: "Inspect a pokemon that has already been caught",
+			callback:    commandInspect,
+		},
 	}
 }
 
 type config struct {
 	pokeapiClient        pokeapi.Client
 	cache                *pokecache.Cache
+	pokedex              map[string]pokeapi.PokeType
 	nextLocationsURL     *string
 	previousLocationsURL *string
 }

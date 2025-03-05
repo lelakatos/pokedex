@@ -13,7 +13,7 @@ import (
 func (c *Client) ExploreLocations(location string, csh *pokecache.Cache) (RespDetailedLocations, error) {
 	url := baseURL + "/location-area/" + location
 	if location == "" {
-		return RespDetailedLocations{}, errors.New("Location does not exist")
+		return RespDetailedLocations{}, errors.New("location does not exist")
 	}
 
 	if cachedValue, exists := csh.Get(url); exists {

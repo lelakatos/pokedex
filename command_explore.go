@@ -2,7 +2,6 @@ package main
 
 import "fmt"
 
-// TODO: Finish function
 func commandExplore(cfg *config, area string) error {
 	fmt.Printf("Exploring %s...\n", area)
 	exploreOptions, err := cfg.pokeapiClient.ExploreLocations(area, cfg.cache)
